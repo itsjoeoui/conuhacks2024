@@ -11,7 +11,8 @@
     "db:studio": "dotenv -c -- drizzle-kit studio",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.7.2",
