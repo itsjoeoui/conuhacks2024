@@ -9,14 +9,24 @@ import { TabsContent } from "~/components/ui/tabs";
 import { Overview } from "../overview";
 import { RecentSales } from "../recent-sales";
 import { type SelectMessage } from "~/types/message";
+import PlotStreamingComponent from "~/components/plotstreaming"
+import {DataPoint} from "~/components/plot"
 
 type Props = {
   messages: SelectMessage[];
 };
+function generateRandomData(length: number): { xValues: number[]; yValues: number[] } {
+  const randomXValues = Array.from({ length }, () => Math.random() * 10);
+  const incrementedYValues = randomXValues.map((_, index) => index + 1);
 
+  return { xValues: randomXValues, yValues: incrementedYValues };
+}
 const OverviewTab = ({ messages }: Props) => {
+  const { xValues, yValues } = generateRandomData(10);
+
   return (
     <TabsContent value="overview" className="space-y-4">
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -119,8 +129,10 @@ const OverviewTab = ({ messages }: Props) => {
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
-          <CardContent className="pl-2">
-            <Overview />
+          <CardContent className="pl-0">
+          <PlotStreamingComponent/>
+            {/* <PlotComponent data={randomData} / >*/}
+            {/*<Overview />*/}
           </CardContent>
         </Card>
         <Card className="col-span-3">
@@ -136,5 +148,8 @@ const OverviewTab = ({ messages }: Props) => {
     </TabsContent>
   );
 };
+
+
+
 
 export default OverviewTab;

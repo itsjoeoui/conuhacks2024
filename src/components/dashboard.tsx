@@ -15,6 +15,8 @@ import OverviewTab from "./tabs/overview-tab";
 import AnalyticsTab from "./tabs/analytics-tab";
 import { type SelectMessage } from "~/types/message";
 
+
+
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Example dashboard app built using the components.",
@@ -24,7 +26,9 @@ type Props = {
   messages: SelectMessage[];
 };
 
+
 export default function DashboardPage({ messages }: Props) {
+
   return (
     <>
       <div className="hidden flex-col md:flex">
