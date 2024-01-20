@@ -1,5 +1,3 @@
-import { type Metadata } from "next";
-
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import {
   Select,
@@ -14,11 +12,6 @@ import { Label } from "./ui/label";
 import OverviewTab from "./tabs/overview-tab";
 import AnalyticsTab from "./tabs/analytics-tab";
 import { type SelectMessage } from "~/types/message";
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
 
 type Props = {
   messages: SelectMessage[];
@@ -48,20 +41,12 @@ export default function DashboardPage({ messages }: Props) {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              {/* <CalendarDateRangePicker /> */}
-              {/* <Button>Download</Button> */}
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
-              {/* <TabsTrigger value="reports" disabled> */}
-              {/*   Reports */}
-              {/* </TabsTrigger> */}
-              {/* <TabsTrigger value="notifications" disabled> */}
-              {/*   Notifications */}
-              {/* </TabsTrigger> */}
             </TabsList>
             <OverviewTab messages={messages} />
             <AnalyticsTab messages={messages} />
