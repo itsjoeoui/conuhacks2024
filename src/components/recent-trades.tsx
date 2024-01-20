@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { cn } from "~/lib/utils";
 import { type SelectMessage } from "~/types/message";
 
 type Props = {
@@ -17,7 +18,22 @@ export function RecentTrades({ messages }: Props) {
           </Avatar>
           <div className="ml-4 space-y-1">
             <p className="text-sm font-medium leading-none">{message.Symbol}</p>
-            <p className="text-sm text-muted-foreground">
+            <p
+              className={cn("text-sm text-muted-foreground", {
+                "text-red-500": [
+                  "Cancelled",
+                  "CancelAcknowledged",
+                  "Rejected",
+                ].includes(message.MessageType),
+                "text-orange-500": [
+                  "CancelRequest",
+                  "NewOrderRequest",
+                ].includes(message.MessageType),
+                "text-green-500": ["NewOrderAcknowledged", "Trade"].includes(
+                  message.MessageType,
+                ),
+              })}
+            >
               {message.MessageType} at {format(message.TimeStamp, "hh:mm:ss")}
             </p>
           </div>
