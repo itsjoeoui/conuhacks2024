@@ -15,6 +15,20 @@
       "when": 1705773691378,
       "tag": "0001_noisy_venus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1705775603497,
+      "tag": "0002_brainy_sebastian_shaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1705775795785,
+      "tag": "0003_careless_overlord",
+      "breakpoints": true
     }
   ]
 }

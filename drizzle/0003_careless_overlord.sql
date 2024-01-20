@@ -1,0 +1,1 @@
+ALTER TABLE "conuhacks2024_message" ALTER COLUMN "order_price" SET DATA TYPE real;

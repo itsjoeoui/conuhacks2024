@@ -1,6 +1,7 @@
 import {
   bigint,
   pgTableCreator,
+  real,
   serial,
   text,
   timestamp,
@@ -9,24 +10,25 @@ import {
 export const pgTable = pgTableCreator((name) => `conuhacks2024_${name}`);
 
 export const message = pgTable("message", {
-  id: serial("id").primaryKey(),
-  timeStamp: timestamp("time_stamp").notNull(),
-  timeStampEpoch: timestamp("time_stamp_epoch").notNull(),
-  direction: text("direction", {
+  ID: serial("id").primaryKey(),
+  TimeStamp: timestamp("time_stamp").notNull(),
+  // TimeStampEpoch: timestamp("time_stamp_epoch").notNull(),
+  Direction: text("direction", {
     enum: ["ExchangeToNBF", "NBFToExchange"],
   }).notNull(),
-  orderId: text("order_id").notNull(),
-  messageType: text("message_type", {
+  OrderID: text("order_id").notNull(),
+  MessageType: text("message_type", {
     enum: [
       "CancelRequest",
       "NewOrderRequest",
       "NewOrderAcknowledged",
       "CancelAcknowledged",
+      "Cancelled",
     ],
   }).notNull(),
-  symbol: text("symbol").notNull(),
-  orderPrice: bigint("order_price", { mode: "number" }).notNull(),
-  exchange: text("exchange", {
+  Symbol: text("symbol").notNull(),
+  OrderPrice: real("order_price"),
+  Exchange: text("exchange", {
     enum: ["Exchange_1", "Exchange_2", "Exchange_3"],
   }).notNull(),
 });
