@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import { ThemeProvider } from "~/components/theme-provider";
+import { SiteHeader } from "~/components/site-header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,7 +32,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <SiteHeader />
+            {children}
+          </TRPCReactProvider>
         </ThemeProvider>
       </body>
     </html>
