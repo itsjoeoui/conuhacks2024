@@ -16,4 +16,6 @@ function loadExchangeData(filePath: string) {
   return data;
 }
 
+// await db.insert(message).values(loadExchangeData("./public/Exchange_1.json"));
+// await db.insert(message).values(loadExchangeData("./public/Exchange_2.json"));
 await db.insert(message).values(loadExchangeData("./public/Exchange_3.json"));
