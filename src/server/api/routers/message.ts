@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { sql, desc, eq } from "drizzle-orm";
+import { sql, eq } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { message } from "~/server/db/schema";
