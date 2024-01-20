@@ -7,7 +7,7 @@ import {
 } from "~/components/ui/card";
 import { TabsContent } from "~/components/ui/tabs";
 import { Overview } from "../overview";
-import { RecentSales } from "../recent-sales";
+import { RecentTrades } from "../recent-trades";
 import { type SelectMessage } from "~/types/message";
 
 type Props = {
@@ -129,7 +129,7 @@ const OverviewTab = ({ messages }: Props) => {
             <CardDescription></CardDescription>
           </CardHeader>
           <CardContent>
-            <RecentSales />
+            <RecentTrades messages={messages} />
           </CardContent>
         </Card>
       </div>

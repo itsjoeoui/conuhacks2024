@@ -1,3 +1,5 @@
+"use client";
+
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import {
   Select,
@@ -12,12 +14,25 @@ import { Label } from "./ui/label";
 import OverviewTab from "./tabs/overview-tab";
 import AnalyticsTab from "./tabs/analytics-tab";
 import { type SelectMessage } from "~/types/message";
+import { api } from "~/trpc/react";
+import { useState } from "react";
+import { exchangeList } from "~/types/exchange";
 
 type Props = {
   messages: SelectMessage[];
 };
 
 export default function DashboardPage({ messages }: Props) {
+  const [exchange, setExchange] =
+    useState<(typeof exchangeList)[number]>("Exchange_3");
+
+  const { data } = api.message.getMessagesByExchange.useQuery(
+    {
+      exchange,
+    },
+    { initialData: messages },
+  );
+
   return (
     <>
       <div className="hidden flex-col md:flex">
@@ -28,16 +43,23 @@ export default function DashboardPage({ messages }: Props) {
             </h2>
             <div className="flex items-center space-x-2">
               <Label>Select an exchange: </Label>
-              <Select>
+              <Select
+                value={exchange}
+                onValueChange={(val) =>
+                  setExchange(val as (typeof exchangeList)[number])
+                }
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Pick one" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Exchanges</SelectLabel>
-                    <SelectItem value="Exchange_1">Exchange 1</SelectItem>
-                    <SelectItem value="Exchange_2">Exchange 2</SelectItem>
-                    <SelectItem value="Exchange_3">Exchange 3</SelectItem>
+                    {exchangeList.map((exchange) => (
+                      <SelectItem key={exchange} value={exchange}>
+                        {exchange}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -48,8 +70,8 @@ export default function DashboardPage({ messages }: Props) {
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
-            <OverviewTab messages={messages} />
-            <AnalyticsTab messages={messages} />
+            <OverviewTab messages={data} />
+            <AnalyticsTab messages={data} />
           </Tabs>
         </div>
       </div>
