@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Seeing the Forest for the Trees",
+  name: "Seeing the Forest for the Trees - ConUHacks 2024",
   url: "https://fijoy.app",
   description: "",
   // links: {
