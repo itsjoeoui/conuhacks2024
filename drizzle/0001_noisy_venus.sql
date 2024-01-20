@@ -1,0 +1,1 @@
+ALTER TABLE "conuhacks2024_message" ADD COLUMN "id" serial NOT NULL;

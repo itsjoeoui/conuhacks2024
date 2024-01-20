@@ -1,8 +1,15 @@
-import { bigint, pgTableCreator, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  bigint,
+  pgTableCreator,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 export const pgTable = pgTableCreator((name) => `conuhacks2024_${name}`);
 
 export const message = pgTable("message", {
+  id: serial("id").primaryKey(),
   timeStamp: timestamp("time_stamp").notNull(),
   timeStampEpoch: timestamp("time_stamp_epoch").notNull(),
   direction: text("direction", {
