@@ -3,6 +3,7 @@ import { TabsContent } from "../ui/tabs";
 import SQLQuery from "../sql-query";
 import { type SelectMessage } from "~/types/message";
 import { Card } from "../ui/card";
+import Chatbot from "../chatbot";
 
 type Props = {
   messages: SelectMessage[];
@@ -11,6 +12,7 @@ type Props = {
 const AnalyticsTab = ({ messages }: Props) => {
   return (
     <TabsContent value="analytics" className="space-y-4">
+      <Chatbot />
       <SQLQuery />
       {messages.map((message) => {
         return (
