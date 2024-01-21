@@ -1,3 +1,5 @@
+[devpost](https://devpost.com/software/national-stonk)
+
 # Inspiration 💡
 
 Our goal was trying to find something novel in the world of financial visualisations. Since the domain is old and has thus already been extensively explored we decided to focus mainly on novel ways in which the user can interact with the data.
