@@ -29,6 +29,13 @@ export default function DashboardPage(props: Props) {
     useState<(typeof exchangeList)[number]>("Exchange_1");
   const [symbol, setSymbol] = useState<string>("OUTD9");
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const [messages, setMessages] = useState<SelectMessage[]>([]);
+  const [stats, setStats] = useState({
+    total_volumn: 0,
+    total_completed: 0,
+    total_canceled: 0,
+    total_rejected: 0,
+  });
 
   api.message.getStartingTime.useQuery(
     { exchange, symbol },
@@ -50,21 +57,21 @@ export default function DashboardPage(props: Props) {
     },
   );
 
-  const { data: messages, isFetching } =
-    api.message.getMessagesByExchangeAndSymbol.useQuery(
-      {
-        exchange,
-        symbol,
-        currentTime,
-      },
-      {
-        initialData: props.messages,
-        refetchInterval: () => 2000,
-        refetchOnWindowFocus: false,
-      },
-    );
+  const { isFetching } = api.message.getMessagesByExchangeAndSymbol.useQuery(
+    {
+      exchange,
+      symbol,
+      currentTime,
+    },
+    {
+      initialData: props.messages,
+      refetchInterval: () => 2000,
+      refetchOnWindowFocus: false,
+      onSuccess: (data) => setMessages(data),
+    },
+  );
 
-  const { data: stats } = api.message.getStatsByExchangeAndSymbol.useQuery(
+  api.message.getStatsByExchangeAndSymbol.useQuery(
     {
       exchange,
       symbol,
@@ -78,6 +85,9 @@ export default function DashboardPage(props: Props) {
         total_completed: 0,
         total_canceled: 0,
         total_rejected: 0,
+      },
+      onSuccess: (data) => {
+        setStats(data);
       },
     },
   );
