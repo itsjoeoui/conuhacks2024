@@ -33,7 +33,6 @@ const PlotStreamingComponent = ({ messages }: Props) => {
   const [data, setData] = useState<DataPoint[]>([
     {
       y: [0],
-      y: [0],
       mode: "lines",
       line: { color: "#80CAF6" },
     },
@@ -66,7 +65,7 @@ const PlotStreamingComponent = ({ messages }: Props) => {
     let cnt = 0;
     const interval = setInterval(() => {
       if (data[0]) {
-        const newData: (DataPoint )[] = [
+        const newData: DataPoint[] = [
           {
             y: [...data[0].y, pt],
             mode: "lines",
@@ -89,8 +88,8 @@ const PlotStreamingComponent = ({ messages }: Props) => {
       <Plot
         data={data}
         layout={{
-          xaxis: {title: 'Time (Relative)'},
-          yaxis: {title: 'Price'},
+          xaxis: { title: "Time (Relative)" },
+          yaxis: { title: "Price" },
           paper_bgcolor: "#020817",
           plot_bgcolor: "#020817",
           font: {
@@ -107,3 +106,4 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 };
 
 export default PlotStreamingComponent;
+
