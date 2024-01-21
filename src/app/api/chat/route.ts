@@ -8,6 +8,7 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { messages: userMessages } = await req.json();
   const contextPrePrompt = [
     {
@@ -26,6 +27,7 @@ export async function POST(req: Request) {
     },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const messages = [...contextPrePrompt, ...userMessages];
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",

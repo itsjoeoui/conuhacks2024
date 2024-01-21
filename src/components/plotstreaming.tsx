@@ -1,6 +1,6 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import Plot from 'react-plotly.js';
+"use client";
+import React, { useEffect, useState } from "react";
+import Plot from "react-plotly.js";
 
 interface DataPoint {
   y: number[];
@@ -14,13 +14,13 @@ const PlotStreamingComponent: React.FC = () => {
   const [data, setData] = useState<DataPoint[]>([
     {
       y: [1, 2, 3].map(rand),
-      mode: 'lines',
-      line: { color: '#80CAF6' },
+      mode: "lines",
+      line: { color: "#80CAF6" },
     },
     {
       y: [1, 2, 3].map(rand),
-      mode: 'lines',
-      line: { color: '#DF56F1' },
+      mode: "lines",
+      line: { color: "#DF56F1" },
     },
   ]);
 
@@ -28,17 +28,19 @@ const PlotStreamingComponent: React.FC = () => {
     let cnt = 0;
     const interval = setInterval(() => {
       if (data[0]) {
-        const newData: DataPoint[] = [
+        const newData: (DataPoint & {
+          showlegend: boolean;
+        })[] = [
           {
             y: [...data[0].y, rand()],
-            mode: 'lines',
-            line: { color: '#80CAF6' },
+            mode: "lines",
+            line: { color: "#80CAF6" },
             showlegend: false,
           },
           {
             y: data[1] ? [...data[1].y, rand()] : [rand()],
-            mode: 'lines',
-            line: { color: '#DF56F1' },
+            mode: "lines",
+            line: { color: "#DF56F1" },
             showlegend: false,
           },
         ];
@@ -58,12 +60,12 @@ const PlotStreamingComponent: React.FC = () => {
       <Plot
         data={data}
         layout={{
-          paper_bgcolor: '#020817',
-          plot_bgcolor: '#020817',
+          paper_bgcolor: "#020817",
+          plot_bgcolor: "#020817",
           font: {
-            color: 'white',
+            color: "white",
           },
-          width : 600,
+          width: 600,
           height: 400,
         }}
       />
@@ -72,3 +74,4 @@ const PlotStreamingComponent: React.FC = () => {
 };
 
 export default PlotStreamingComponent;
+

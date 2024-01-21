@@ -157,12 +157,18 @@ devDependencies:
   '@types/node':
     specifier: ^18.17.0
     version: 18.19.8
+  '@types/plotly.js':
+    specifier: ^2.12.32
+    version: 2.12.32
   '@types/react':
     specifier: ^18.2.37
     version: 18.2.48
   '@types/react-dom':
     specifier: ^18.2.15
     version: 18.2.18
+  '@types/react-plotly.js':
+    specifier: ^2.6.3
+    version: 2.6.3
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.11.0
     version: 6.19.0(@typescript-eslint/parser@6.19.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -2402,6 +2408,10 @@ packages:
       pg-types: 2.2.0
     dev: false
 
+  /@types/plotly.js@2.12.32:
+    resolution: {integrity: sha512-pCE60W1v77zxobnA1oGIisHhGzTHv8c4fAtM81Y1h7gezeKpLpx4E0fQ3ThKIPOIvGlnoVseUjSpFwFqIKdsXg==}
+    dev: true
+
   /@types/prop-types@15.7.11:
     resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==}
 
@@ -2409,6 +2419,13 @@ packages:
     resolution: {integrity: sha512-TJxDm6OfAX2KJWJdMEVTwWke5Sc/E/RlnPGvGfS0W7+6ocy2xhDVQVh/KvC2Uf7kACs+gDytdusDSdWfWkaNzw==}
     dependencies:
       '@types/react': 18.2.48
+
+  /@types/react-plotly.js@2.6.3:
+    resolution: {integrity: sha512-HBQwyGuu/dGXDsWhnQrhH+xcJSsHvjkwfSRjP+YpOsCCWryIuXF78ZCBjpfgO3sCc0Jo8sYp4NOGtqT7Cn3epQ==}
+    dependencies:
+      '@types/plotly.js': 2.12.32
+      '@types/react': 18.2.48
+    dev: true
 
   /@types/react@18.2.48:
     resolution: {integrity: sha512-qboRCl6Ie70DQQG9hhNREz81jqC1cs9EVNcjQ1AU+jH6NFfSAhVVbrrY/+nSF+Bsk4AOwm9Qa61InvMCyV+H3w==}
