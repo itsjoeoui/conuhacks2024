@@ -100,7 +100,7 @@ export const messageRouter = createTRPCRouter({
           ),
         );
       return {
-        total_volumn: total?.total,
+        total_volumn: Number(total?.total),
         total_completed: result.find((r) => r.type === "NewOrderAcknowledged")
           ?.total,
         total_canceled: result.find((r) => r.type === "CancelAcknowledged")
