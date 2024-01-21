@@ -1,8 +1,9 @@
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { env } from "~/env";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: env.OPEN_AI_API,
 });
 
 export const runtime = "edge";
