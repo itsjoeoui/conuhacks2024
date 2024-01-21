@@ -46,6 +46,7 @@ export default function DashboardPage(props: Props) {
     exchange,
     {
       initialData: props.symbols,
+      keepPreviousData: true,
       refetchOnWindowFocus: false,
     },
   );
@@ -63,6 +64,24 @@ export default function DashboardPage(props: Props) {
         refetchOnWindowFocus: false,
       },
     );
+
+  const { data: stats } = api.message.getStatsByExchangeAndSymbol.useQuery(
+    {
+      exchange,
+      symbol,
+      currentTime,
+    },
+    {
+      refetchInterval: () => 2000,
+      refetchOnWindowFocus: false,
+      initialData: {
+        total_volumn: 0,
+        total_completed: 0,
+        total_canceled: 0,
+        total_rejected: 0,
+      },
+    },
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -142,7 +161,7 @@ export default function DashboardPage(props: Props) {
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
-            <OverviewTab messages={messages} />
+            <OverviewTab messages={messages} stats={stats} />
             <AnalyticsTab messages={messages} />
           </Tabs>
         </div>

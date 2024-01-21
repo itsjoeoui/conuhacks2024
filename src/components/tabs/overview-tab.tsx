@@ -12,15 +12,21 @@ import { type SelectMessage } from "~/types/message";
 
 type Props = {
   messages: SelectMessage[];
+  stats: {
+    total_volumn: number;
+    total_completed: number;
+    total_canceled: number;
+    total_rejected: number;
+  };
 };
 
-const OverviewTab = ({ messages }: Props) => {
+const OverviewTab = ({ messages, stats }: Props) => {
   return (
     <TabsContent value="overview" className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+            <CardTitle className="text-sm font-medium">Total Volumn</CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -35,15 +41,17 @@ const OverviewTab = ({ messages }: Props) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
+            <div className="text-2xl font-bold">{stats.total_volumn}</div>
             <p className="text-xs text-muted-foreground">
-              +20.1% from last month
+              {/* +20.1% from last month */}
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total Completed
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -60,15 +68,17 @@ const OverviewTab = ({ messages }: Props) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
+            <div className="text-2xl font-bold">{stats.total_completed}</div>
             <p className="text-xs text-muted-foreground">
-              +180.1% from last month
+              {/* +180.1% from last month */}
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Sales</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total Canceled
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -84,15 +94,17 @@ const OverviewTab = ({ messages }: Props) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
+            <div className="text-2xl font-bold">{stats.total_canceled}</div>
             <p className="text-xs text-muted-foreground">
-              +19% from last month
+              {/* +19% from last month */}
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total Rejected
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -107,9 +119,9 @@ const OverviewTab = ({ messages }: Props) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+573</div>
+            <div className="text-2xl font-bold">{stats.total_rejected}</div>
             <p className="text-xs text-muted-foreground">
-              +201 since last hour
+              {/* +201 since last hour */}
             </p>
           </CardContent>
         </Card>
