@@ -19,6 +19,8 @@ const PlotStreamingComponent = ({ messages }: Props) => {
     (m) => m.MessageType === "NewOrderAcknowledged",
   );
 
+  const [symbol, setSymbol] = useState<string>();
+
   const avgPrice =
     acceptedOnes.reduce((acc, m) => {
       if (!m.OrderPrice) {
@@ -40,6 +42,22 @@ const PlotStreamingComponent = ({ messages }: Props) => {
       setPt(avgPrice);
     }
   }, [avgPrice]);
+
+  useEffect(() => {
+    if (messages.length > 0 && messages[0]) {
+      if (symbol !== messages[0].Symbol) {
+        setData([
+          {
+            y: [],
+            mode: "lines",
+            line: { color: "#80CAF6" },
+          },
+        ]);
+
+        setSymbol(messages[0].Symbol);
+      }
+    }
+  }, [messages, symbol]);
 
   useEffect(() => {
     let cnt = 0;
