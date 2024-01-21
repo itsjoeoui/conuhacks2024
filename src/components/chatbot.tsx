@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "./ui/card";
 import { Input } from "./ui/input";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
+import { cn } from "~/lib/utils";
 
 const examples: string[] = [
   "What is the most traded symbol in Exchange_1?",
@@ -69,7 +70,12 @@ export default function Chatbot() {
             </div>
           ) : (
             messages.map((m) => (
-              <div key={m.id} className="whitespace-pre-wrap px-4 py-2">
+              <div
+                key={m.id}
+                className={cn("whitespace-pre-wrap px-4 py-2", {
+                  "text-muted-foreground": m.role !== "user",
+                })}
+              >
                 {m.role === "user" ? "You: " : "National Stonk AI: "}
                 {m.content}
               </div>
