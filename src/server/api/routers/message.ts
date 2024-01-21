@@ -101,10 +101,10 @@ export const messageRouter = createTRPCRouter({
         );
       return {
         total_volumn: Number(total?.total),
-        total_completed: result.find((r) => r.type === "NewOrderAcknowledged")
-          ?.total,
-        total_canceled: result.find((r) => r.type === "CancelAcknowledged")
-          ?.total,
+        total_completed:
+          result.find((r) => r.type === "NewOrderAcknowledged")?.total ?? 0,
+        total_canceled:
+          result.find((r) => r.type === "CancelAcknowledged")?.total ?? 0,
         total_rejected: result.find((r) => r.type === "Rejected")?.total ?? 0,
       };
     }),

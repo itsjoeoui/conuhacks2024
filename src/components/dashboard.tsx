@@ -47,7 +47,6 @@ export default function DashboardPage(props: Props) {
     {
       initialData: props.symbols,
       keepPreviousData: true,
-      refetchOnWindowFocus: false,
     },
   );
 
