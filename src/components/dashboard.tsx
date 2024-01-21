@@ -24,6 +24,7 @@ type Props = {
   symbols: string[];
 };
 
+
 export default function DashboardPage(props: Props) {
   const [exchange, setExchange] =
     useState<(typeof exchangeList)[number]>("Exchange_1");
