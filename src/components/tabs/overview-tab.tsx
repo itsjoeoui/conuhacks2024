@@ -132,7 +132,7 @@ const OverviewTab = ({ messages, stats }: Props) => {
             <CardTitle>Overview</CardTitle>
           </CardHeader>
           <CardContent className="pl-0">
-            <PlotStreamingComponent />
+            <PlotStreamingComponent messages={messages} />
             {/* <PlotComponent data={randomData} / >*/}
             {/*<Overview />*/}
           </CardContent>

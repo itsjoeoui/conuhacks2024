@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
+import { type SelectMessage } from "~/types/message";
 
 interface DataPoint {
   y: number[];
@@ -10,18 +11,34 @@ interface DataPoint {
 
 const rand = () => Math.random();
 
-const PlotStreamingComponent: React.FC = () => {
+type Props = {
+  messages: SelectMessage[];
+};
+
+const PlotStreamingComponent = ({ messages }: Props) => {
+  const acceptedOnes = messages.filter(
+    (m) => m.MessageType === "NewOrderAcknowledged",
+  );
+
+  const avgPrice =
+    acceptedOnes.reduce((acc, m) => {
+      if (!m.OrderPrice) {
+        return acc;
+      }
+      return acc + m.OrderPrice;
+    }, 0) / acceptedOnes.length;
+
   const [data, setData] = useState<DataPoint[]>([
     {
       y: [1, 2, 3].map(rand),
       mode: "lines",
       line: { color: "#80CAF6" },
     },
-    {
-      y: [1, 2, 3].map(rand),
-      mode: "lines",
-      line: { color: "#DF56F1" },
-    },
+    // {
+    //   y: [1, 2, 3].map(rand),
+    //   mode: "lines",
+    //   line: { color: "#DF56F1" },
+    // },
   ]);
 
   useEffect(() => {
@@ -32,17 +49,17 @@ const PlotStreamingComponent: React.FC = () => {
           showlegend: boolean;
         })[] = [
           {
-            y: [...data[0].y, rand()],
+            y: [...data[0].y, avgPrice],
             mode: "lines",
             line: { color: "#80CAF6" },
             showlegend: false,
           },
-          {
-            y: data[1] ? [...data[1].y, rand()] : [rand()],
-            mode: "lines",
-            line: { color: "#DF56F1" },
-            showlegend: false,
-          },
+          // {
+          //   y: data[1] ? [...data[1].y, rand()] : [rand()],
+          //   mode: "lines",
+          //   line: { color: "#DF56F1" },
+          //   showlegend: false,
+          // },
         ];
 
         setData(newData);
@@ -53,7 +70,7 @@ const PlotStreamingComponent: React.FC = () => {
 
     // Cleanup function to clear the interval on component unmount
     return () => clearInterval(interval);
-  }, [data]);
+  }, [data, messages]);
 
   return (
     <div>
