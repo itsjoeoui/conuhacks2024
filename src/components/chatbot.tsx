@@ -1,37 +1,49 @@
-'use client';
+"use client";
 
-import { unstable_noStore } from "next/cache";
-import { useChat } from 'ai/react';
-import DashboardPage from "~/components/dashboard";
-import { api } from "~/trpc/server";
+import { useChat } from "ai/react";
+import AvatarChat from "./avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "./ui/avatar"
 
 export default function Chatbot() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto border border-black">
-  <div className="overflow-auto py-4" style={{ minHeight: '300px' }}>
-    {messages.length === 0 ? (
-      <div className="text-left mx-4 text-gray-500">Ask a SQL query </div>
-    ) : (
-      messages.map((m) => (
-        <div key={m.id} className="whitespace-pre-wrap px-4 py-2">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
-          {m.content}
-        </div>
-      ))
-    )}
-  </div>
+    <div className="mx-auto flex w-2/4  flex-col border border-black">
+      <div className="overflow-auto py-4" style={{ minHeight: "500px" }}>
+        {messages.length === 0 ? (
+          <div className="mx-4 text-left text-gray-500">Ask a SQL query </div>
+        ) : (
+          messages.map((m) => (
+            <pre>
+              <div key={m.id} className="whitespace-pre-wrap px-4 py-2 m-3">
+              {m.role === "user" ? 
+              <div className="flex flex-row gap-3">
+                <AvatarChat src="../../public/user.png" alt="@shadcn" fallbackInitials="U"/>
+                <h3 className="text-white font-semibold mt-2">User</h3>
+              </div>
+               : <div className="flex flex-row gap-3">
+                  <AvatarChat src="../../public/chatgpt.png" alt="@shadcn" fallbackInitials="AI"/>
+                  <h3 className="text-white font-semibold mt-2">AI</h3>
+               </div>
+               }
+              {m.content}
+              </div>
+            </pre>
+          ))
+        )}
+      </div>
 
-  <form onSubmit={handleSubmit} className="mt-auto w-full">
-    <input
-      className="w-full py-2 px-4 border-t border-black"
-      value={input}
-      placeholder="Say something..."
-      onChange={handleInputChange}
-    />
-  </form>
-</div>
-
-
+      <form onSubmit={handleSubmit} className="mt-auto w-full">
+        <input
+          className="w-full border-t border-black rounded-md px-4 py-2"
+          value={input}
+          placeholder="Message our AI..."
+          onChange={handleInputChange}
+        />
+      </form>
+    </div>
   );
 }
