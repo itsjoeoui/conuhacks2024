@@ -99,14 +99,13 @@ export const messageRouter = createTRPCRouter({
             lt(message.TimeStamp, input.currentTime),
           ),
         );
-      console.log(total);
       return {
         total_volumn: total?.total,
         total_completed: result.find((r) => r.type === "NewOrderAcknowledged")
           ?.total,
         total_canceled: result.find((r) => r.type === "CancelAcknowledged")
           ?.total,
-        total_rejected: result.find((r) => r.type === "Rejected")?.total,
+        total_rejected: result.find((r) => r.type === "Rejected")?.total ?? 0,
       };
     }),
 });
