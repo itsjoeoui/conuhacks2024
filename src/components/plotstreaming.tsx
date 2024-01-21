@@ -106,4 +106,3 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 };
 
 export default PlotStreamingComponent;
-
