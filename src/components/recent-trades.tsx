@@ -42,6 +42,7 @@ export function RecentTrades({ messages }: Props) {
           )}
         </div>
       ))}
+      {messages.length === 0 && <div>Waiting for more orders...</div>}
     </div>
   );
 }
