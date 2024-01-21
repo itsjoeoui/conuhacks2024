@@ -19,6 +19,9 @@ const PlotStreamingComponent = ({ messages }: Props) => {
     (m) => m.MessageType === "NewOrderAcknowledged",
   );
 
+  const [exchangeTitle, setExchange] = useState<string>();
+  const [symbol, setSymbol] = useState<string>();
+
   const avgPrice =
     acceptedOnes.reduce((acc, m) => {
       if (!m.OrderPrice) {
@@ -29,7 +32,7 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 
   const [data, setData] = useState<DataPoint[]>([
     {
-      y: [],
+      y: [0],
       mode: "lines",
       line: { color: "#80CAF6" },
     },
@@ -42,17 +45,31 @@ const PlotStreamingComponent = ({ messages }: Props) => {
   }, [avgPrice]);
 
   useEffect(() => {
+    if (messages.length > 0 && messages[0]) {
+      if (symbol !== messages[0].Symbol) {
+        setData([
+          {
+            y: [0],
+            mode: "lines",
+            line: { color: "#80CAF6" },
+          },
+        ]);
+
+        setSymbol(messages[0].Symbol);
+        setExchange(messages[0].Exchange);
+      }
+    }
+  }, [messages, symbol]);
+
+  useEffect(() => {
     let cnt = 0;
     const interval = setInterval(() => {
       if (data[0]) {
-        const newData: (DataPoint & {
-          showlegend: boolean;
-        })[] = [
+        const newData: (DataPoint )[] = [
           {
             y: [...data[0].y, pt],
             mode: "lines",
             line: { color: "#80CAF6" },
-            showlegend: false,
           },
         ];
 
@@ -71,6 +88,8 @@ const PlotStreamingComponent = ({ messages }: Props) => {
       <Plot
         data={data}
         layout={{
+          xaxis: {title: 'Time (Relative)'},
+          yaxis: {title: 'Price'},
           paper_bgcolor: "#020817",
           plot_bgcolor: "#020817",
           font: {
@@ -78,6 +97,8 @@ const PlotStreamingComponent = ({ messages }: Props) => {
           },
           width: 600,
           height: 400,
+          showlegend: false,
+          title: exchangeTitle + " : " + symbol,
         }}
       />
     </div>
@@ -85,4 +106,3 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 };
 
 export default PlotStreamingComponent;
-
