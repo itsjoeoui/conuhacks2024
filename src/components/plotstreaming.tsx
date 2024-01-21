@@ -9,13 +9,12 @@ interface DataPoint {
   line: { color: string };
 }
 
-const rand = () => Math.random();
-
 type Props = {
   messages: SelectMessage[];
 };
 
 const PlotStreamingComponent = ({ messages }: Props) => {
+  const [pt, setPt] = useState(0);
   const acceptedOnes = messages.filter(
     (m) => m.MessageType === "NewOrderAcknowledged",
   );
@@ -30,16 +29,17 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 
   const [data, setData] = useState<DataPoint[]>([
     {
-      y: [1, 2, 3].map(rand),
+      y: [],
       mode: "lines",
       line: { color: "#80CAF6" },
     },
-    // {
-    //   y: [1, 2, 3].map(rand),
-    //   mode: "lines",
-    //   line: { color: "#DF56F1" },
-    // },
   ]);
+
+  useEffect(() => {
+    if (avgPrice > 0) {
+      setPt(avgPrice);
+    }
+  }, [avgPrice]);
 
   useEffect(() => {
     let cnt = 0;
@@ -49,17 +49,11 @@ const PlotStreamingComponent = ({ messages }: Props) => {
           showlegend: boolean;
         })[] = [
           {
-            y: [...data[0].y, avgPrice],
+            y: [...data[0].y, pt],
             mode: "lines",
             line: { color: "#80CAF6" },
             showlegend: false,
           },
-          // {
-          //   y: data[1] ? [...data[1].y, rand()] : [rand()],
-          //   mode: "lines",
-          //   line: { color: "#DF56F1" },
-          //   showlegend: false,
-          // },
         ];
 
         setData(newData);
@@ -70,7 +64,7 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 
     // Cleanup function to clear the interval on component unmount
     return () => clearInterval(interval);
-  }, [data, messages]);
+  }, [data, messages, pt]);
 
   return (
     <div>
