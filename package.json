@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "pnpm db:migrate && next build",
     "db:generate": "dotenv -c -- drizzle-kit generate:pg",
     "db:migrate": "dotenv -c -- tsx src/server/db/migrate.ts",
     "db:push": "dotenv -c -- drizzle-kit push:pg",

@@ -7,7 +7,7 @@ import {
 } from "~/components/ui/card";
 import { TabsContent } from "~/components/ui/tabs";
 import { Overview } from "../overview";
-import { RecentSales } from "../recent-sales";
+import { RecentTrades } from "../recent-trades";
 import { type SelectMessage } from "~/types/message";
 import PlotStreamingComponent from "~/components/plotstreaming"
 import {DataPoint} from "~/components/plot"
@@ -137,11 +137,11 @@ const OverviewTab = ({ messages }: Props) => {
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle>Recent Sales</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
+            <CardTitle>Recent Trades</CardTitle>
+            <CardDescription></CardDescription>
           </CardHeader>
           <CardContent>
-            <RecentSales />
+            <RecentTrades messages={messages} />
           </CardContent>
         </Card>
       </div>
