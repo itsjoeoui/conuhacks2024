@@ -24,7 +24,6 @@ type Props = {
   symbols: string[];
 };
 
-
 export default function DashboardPage(props: Props) {
   const [exchange, setExchange] =
     useState<(typeof exchangeList)[number]>("Exchange_1");
@@ -172,7 +171,7 @@ export default function DashboardPage(props: Props) {
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
             <OverviewTab messages={messages} stats={stats} />
-            <AnalyticsTab messages={messages} />
+            <AnalyticsTab />
           </Tabs>
         </div>
       </div>
