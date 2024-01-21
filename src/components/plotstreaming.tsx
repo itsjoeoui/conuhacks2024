@@ -31,7 +31,7 @@ const PlotStreamingComponent = ({ messages }: Props) => {
 
   const [data, setData] = useState<DataPoint[]>([
     {
-      y: [],
+      y: [0],
       mode: "lines",
       line: { color: "#80CAF6" },
     },
@@ -48,7 +48,7 @@ const PlotStreamingComponent = ({ messages }: Props) => {
       if (symbol !== messages[0].Symbol) {
         setData([
           {
-            y: [],
+            y: [0],
             mode: "lines",
             line: { color: "#80CAF6" },
           },
